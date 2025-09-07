@@ -26,6 +26,10 @@
       .content {
         padding-top: 0;
       }
+      /* Hide nested sidebar items to prevent subheaders from showing */
+      .sidebar-nav ul ul {
+        display: none;
+      }
     </style>
     <link rel="icon" href="/_media/icon.jpg" type="image/png" />
   </head>
@@ -38,7 +42,10 @@
         repo: "",
         loadSidebar: true,
         auto2top: true,
-        subMaxLevel: 0,
+        subMaxLevel: 2,
+        alias: {
+          '/guide/.*': '/_sidebar.md',
+        },
         toc: {
           tocMaxLevel: 6,
           target: "h1, h2, h3, h4, h5, h6",
