@@ -17,6 +17,7 @@ This is a Docsify-based documentation site that provides a simple way to create 
 ## Configuration Notes
 
 - `subMaxLevel: 0` is set to prevent subheaders from appearing in the sidebar
+- `basePath: '/docs/'` is configured to use docs as the root directory for documentation files
 - `alias` configuration maps missing `_sidebar.md` files to the root `_sidebar.md` to prevent loading issues
 - All documentation files are organized in the `docs/` directory
 
@@ -58,7 +59,7 @@ The system works by:
 ## Development Environment
 
 To develop this documentation site:
-1. Edit the Markdown files to update content
+1. Edit the Markdown files in the docs/ directory to update content
 2. Modify index.html to change the site configuration or add plugins
 3. Update _sidebar.md to modify navigation
 4. Use a local server to preview changes
