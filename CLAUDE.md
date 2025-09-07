@@ -4,60 +4,54 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Dockerized Docsify environment that provides automatic documentation updates through Git Webhooks. The project is based on `stilleshan/docsify` image with added features including a right-side table of contents plugin and automatic sidebar generation.
+This is a Docsify-based documentation site that provides a simple way to create documentation websites. The project uses Docsify to generate a static documentation site with automatic sidebar generation and various plugins for enhanced functionality.
 
 ## Key Components
 
-1. **Dockerfile**: Builds the Docker image with Git support and copies necessary files
-2. **entrypoint.sh**: Container entrypoint that handles initialization, Git setup, and service startup
-3. **generate-sidebar.js**: Node.js script that automatically generates the Docsify sidebar based on the directory structure
-4. **listener.js**: Node.js webhook listener that updates documentation when changes are pushed to the Git repository
-5. **index.html**: Main Docsify configuration with custom plugins and styling
-6. **docker-compose.yml**: Example deployment configuration
+1. **index.html**: Main Docsify configuration with custom plugins and styling
+2. **_sidebar.md**: Docsify sidebar (manually maintained)
+3. **installation.md**: Installation guide documentation
+4. **guide/getting-started.md**: Getting started guide
+5. **vercel.json**: Vercel deployment configuration
 
 ## Common Development Tasks
 
-### Building the Docker Image
+### Running the Documentation Site
 ```bash
-docker buildx build \
-  --platform linux/amd64,linux/arm64 \
-  -t sqing33/docsify:latest \
-  -t ghcr.io/sqing33/docsify:latest \
-  --push .
+# Serve the documentation site locally
+npx serve
+# or
+npx http-server
 ```
 
-### Running with Docker Compose
-```bash
-docker-compose up -d
-```
-
-### Environment Variables
-- `DOCSIFY_PORT`: Docsify service port (default: 6158)
-- `ENABLE_GIT`: Enable Git functionality (default: true)
-- `WEBHOOK_PORT`: Webhook listener port (default: 6159)
-- `WEBHOOK_SECRET`: Secret for webhook signature verification
-- `GIT_REMOTE_URL`: Git repository URL
-- `GIT_REMOTE`: Git remote name (default: origin)
-- `GIT_BRANCH`: Git branch to monitor (default: main)
+### Deployment
+This project is configured for deployment on Vercel with the vercel.json configuration file.
 
 ## Architecture
 
 The system works by:
-1. Initializing a Git repository in the `/docs` directory on container startup
-2. Pulling documentation from a remote Git repository
-3. Generating a sidebar automatically based on the directory structure
-4. Listening for webhook events from Gitea/GitHub
-5. Automatically pulling updates and regenerating the sidebar when changes are detected
+1. Using Docsify to dynamically generate documentation pages from Markdown files
+2. Automatically generating navigation based on the sidebar configuration
+3. Providing a responsive design that works on desktop and mobile devices
+4. Including various plugins for enhanced functionality (table of contents, copy code, etc.)
 
 ## File Structure
 ```
 .
-├── Dockerfile              # Docker image build file
-├── entrypoint.sh           # Container entrypoint script
-├── generate-sidebar.js     # Sidebar generation script
-├── listener.js             # Webhook listener service
-├── index.html              # Docsify main HTML and configuration
-├── _sidebar.md             # Docsify sidebar (auto-generated)
-├── README.md               # Project documentation
-└── icon.svg                # Site icon
+├── index.html              # Main Docsify configuration
+├── _sidebar.md             # Sidebar navigation
+├── installation.md         # Installation guide
+├── guide/                  # Guide documentation
+│   └── getting-started.md  # Getting started guide
+├── _media/                 # Media files
+│   └── icon.svg            # Site icon
+└── vercel.json             # Vercel deployment config
 ```
+
+## Development Environment
+
+To develop this documentation site:
+1. Edit the Markdown files to update content
+2. Modify index.html to change the site configuration or add plugins
+3. Update _sidebar.md to modify navigation
+4. Use a local server to preview changes
