@@ -8,12 +8,13 @@ This is a Docsify-based documentation site that provides a simple way to create 
 
 ## Key Components
 
-1. **index.html**: Main Docsify configuration with custom plugins and styling
-2. **_sidebar.md**: Docsify sidebar (manually maintained)
-3. **docs/index.md**: Homepage documentation
-4. **docs/installation.md**: Installation guide documentation
-5. **docs/guide/getting-started.md**: Getting started guide
-6. **vercel.json**: Vercel deployment configuration
+1. **README.md**: 项目概述和使用说明
+2. **index.html**: Docsify 主配置文件，包含自定义插件和样式
+3. **_sidebar.md**: Docsify 侧边栏（手动维护）
+4. **docs/index.md**: 首页文档
+5. **docs/installation.md**: 安装指南文档
+6. **docs/guide/getting-started.md**: 入门教程
+7. **vercel.json**: Vercel 部署配置
 
 ## Configuration Notes
 
@@ -46,6 +47,7 @@ The system works by:
 ## File Structure
 ```
 .
+├── README.md               # Project overview and usage instructions
 ├── index.html              # Main Docsify configuration
 ├── _sidebar.md             # Sidebar navigation
 ├── docs/                   # Documentation files
