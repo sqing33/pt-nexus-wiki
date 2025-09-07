@@ -2,9 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 
-// 脚本假设在项目根目录下运行，文档在 docs 目录中
-const docsDir = './docs'; // 指向 docs 目录
-const sidebarFile = './docs/_sidebar.md'; // 生成的侧边栏文件放在 docs 目录中
+// 脚本假设在项目根目录下运行，文档在项目根目录中
+const docsDir = '.'; // 指向项目根目录
+const sidebarFile = './_sidebar.md'; // 生成的侧边栏文件放在项目根目录中
 let sidebarContent = '';
 
 // 排除列表
@@ -12,6 +12,17 @@ const excludeList = [
     '_sidebar.md',       // 排除侧边栏文件本身
     '.git',              // 排除 .git 目录
     '.gitignore',        // 排除 .gitignore 目录
+    'node_modules',      // 排除 node_modules 目录
+    'docker-compose.yml', // 排除 docker-compose.yml
+    'Dockerfile',        // 排除 Dockerfile
+    'entrypoint.sh',     // 排除 entrypoint.sh
+    'generate-sidebar.js', // 排除 generate-sidebar.js 脚本本身
+    'icon.svg',          // 排除 icon.svg
+    'index.html',        // 排除 index.html
+    'listener.js',       // 排除 listener.js
+    'README.md',         // 排除 README.md
+    'vercel.json',       // 排除 vercel.json
+    'CLAUDE.md',         // 排除 CLAUDE.md
 ];
 
 // 提取文件名中的数字前缀
@@ -50,11 +61,8 @@ function buildSidebar(currentDir, level) {
     const indent = '  '.repeat(level);
 
     if (stat.isDirectory()) {
-      // 在目录名后添加斜杠以便清晰地表示目录
-      sidebarContent += `${indent}* **${item}**\n`; // 可以加粗目录名
-
-      // 递归处理子目录，层级加1
-      buildSidebar(itemPath, level + 1);
+      // 直接处理子目录中的文件，不将目录本身作为一项添加到边栏中
+      buildSidebar(itemPath, level);
     } else if (stat.isFile() && item.endsWith('.md')) {
       const fileNameWithoutExt = path.parse(item).name;
       // 排除 README.md 文件本身，如果需要链接它，应该在父级目录处特殊处理
@@ -65,7 +73,16 @@ function buildSidebar(currentDir, level) {
 
       const linkPath = path.relative(docsDir, itemPath).replace(/\\/g, '/'); // 确保路径使用正斜杠
 	  const displayFileName = fileNameWithoutExt.replace(/^(\d+\.)/, '$1 '); // 在数字前缀后添加空格
-      sidebarContent += `${indent}* [${displayFileName}](${linkPath})\n`; // 使用原始文件名作为链接文本
+	  
+	  // 处理特殊文件名显示
+	  let finalDisplayName = displayFileName;
+	  if (finalDisplayName === 'getting-started') {
+	    finalDisplayName = '入门教程';
+	  } else if (finalDisplayName === 'installation') {
+	    finalDisplayName = '安装指南';
+	  }
+	  
+      sidebarContent += `${indent}* [${finalDisplayName}](${linkPath})\n`; // 使用处理后的文件名作为链接文本
     }
   });
 }
@@ -75,7 +92,7 @@ buildSidebar(docsDir, 0);
 
 // 在顶部添加一个指向根目录（README.md 或 index.html）的链接
 // 这通常是 Docsify 侧边栏的第一项
-sidebarContent = `* [首页](/docs/)\n` + sidebarContent;
+sidebarContent = `* [首页](/)\n` + sidebarContent;
 
 // 写入 _sidebar.md 文件
 fs.writeFileSync(sidebarFile, sidebarContent);
