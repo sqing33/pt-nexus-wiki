@@ -10,14 +10,15 @@ This is a Docsify-based documentation site that provides a simple way to create 
 
 1. **index.html**: Main Docsify configuration with custom plugins and styling
 2. **_sidebar.md**: Docsify sidebar (manually maintained)
-3. **installation.md**: Installation guide documentation
-4. **guide/getting-started.md**: Getting started guide
+3. **docs/installation.md**: Installation guide documentation
+4. **docs/getting-started.md**: Getting started guide
 5. **vercel.json**: Vercel deployment configuration
 
 ## Configuration Notes
 
 - `subMaxLevel: 0` is set to prevent subheaders from appearing in the sidebar
-- Sidebar is configured to work with subdirectories automatically
+- `alias` configuration maps missing `_sidebar.md` files to the root `_sidebar.md` to prevent loading issues
+- All documentation files are organized in the `docs/` directory
 
 ## Common Development Tasks
 
@@ -45,8 +46,8 @@ The system works by:
 .
 ├── index.html              # Main Docsify configuration
 ├── _sidebar.md             # Sidebar navigation
-├── installation.md         # Installation guide
-├── guide/                  # Guide documentation
+├── docs/                   # Documentation files
+│   ├── installation.md     # Installation guide
 │   └── getting-started.md  # Getting started guide
 ├── _media/                 # Media files
 │   └── icon.svg            # Site icon
