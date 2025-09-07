@@ -2,9 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 
-// 脚本假设在项目根目录下运行，文档在项目根目录中
-const docsDir = '.'; // 指向项目根目录
-const sidebarFile = './_sidebar.md'; // 生成的侧边栏文件放在项目根目录中
+// 脚本假设在 /docs 目录下运行（容器环境）
+const docsDir = '.'; // 指向当前目录（在容器中是 /docs）
+const sidebarFile = './_sidebar.md'; // 生成的侧边栏文件放在当前目录中
 let sidebarContent = '';
 
 // 排除列表
