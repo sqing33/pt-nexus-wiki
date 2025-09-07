@@ -1,3 +1,3 @@
 - **文档**
-  - [入门教程](docs/getting-started.md)
+  - [入门教程](docs/guide/getting-started.md)
 - [安装指南](docs/installation.md)
