@@ -1,0 +1,34 @@
+# docker-compose.yml
+services:
+  docsify:
+    image: ghcr.io/sqing33/docsify:latest
+    container_name: docsify
+    ports:
+      # Docsify 服务器端口映射
+      - "6158:6158"
+      # Webhook 监听器端口映射，listener.js 在容器内部监听 6159 端口
+      - "6159:6159"
+
+    environment:
+      # Docsify 服务端口
+      - DOCSIFY_PORT=6158
+      # 是否启用 Git 更新
+      - ENABLE_GIT="true"
+      # WEBHOOK_PORT 监听端口
+      - WEBHOOK_PORT=6159
+      # Webhook 验证密钥
+      - WEBHOOK_SECRET=YOUR_WEBHOOK_SECRET
+      # Git 远程仓库的 URL，用于 entrypoint 中的 git remote add origin
+      - GIT_REMOTE_URL=YOUR_GIT_REPO_URL
+      # Git 远程源的名称，用于 listener.js 中的 git pull
+      - GIT_REMOTE=origin # 通常是 origin，如果你的仓库不是则修改
+      # Git 分支名称，用于 listener.js 中的 git pull 和事件判断
+      - GIT_BRANCH=main
+      - DOCS_DIR=/docs # 默认 /docs ，这应与卷挂载点匹配
+
+    volumes:
+      # 将宿主机目录挂载到容器内的 /docs
+      - '/vol1/1000/Docker/docsify/docs:/docs'
+
+    # 可选：重启策略
+    restart: unless-stopped
