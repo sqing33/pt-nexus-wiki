@@ -1,4 +1,4 @@
 - [首页](/)
+- [安装](docs/安装.md)
 - **文档**
   - [入门教程](docs/guide/getting-started.md)
-- [安装指南](docs/installation.md)
