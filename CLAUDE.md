@@ -14,6 +14,11 @@ This is a Docsify-based documentation site that provides a simple way to create 
 4. **guide/getting-started.md**: Getting started guide
 5. **vercel.json**: Vercel deployment configuration
 
+## Configuration Notes
+
+- `subMaxLevel: 0` is set to prevent subheaders from appearing in the sidebar
+- Sidebar is configured to work with subdirectories automatically
+
 ## Common Development Tasks
 
 ### Running the Documentation Site
