@@ -1,3 +1,4 @@
-* [首页](docs/)
-* [安装指南](docs/installation.md)
-* [用户指南](docs/guide/getting-started.md)
+* [首页](/)
+* [安装指南](installation.md)
+* **用户指南**
+  * [入门教程](guide/getting-started.md)

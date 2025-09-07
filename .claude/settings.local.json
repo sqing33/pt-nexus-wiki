@@ -3,7 +3,9 @@
     "allow": [
       "WebSearch",
       "Bash(node:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebFetch(domain:docsify.js.org)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []
