@@ -23,6 +23,7 @@ const excludeList = [
     'README.md',         // 排除 README.md
     'vercel.json',       // 排除 vercel.json
     'CLAUDE.md',         // 排除 CLAUDE.md
+    '_media',            // 排除 _media 目录
 ];
 
 // 提取文件名中的数字前缀
@@ -61,8 +62,12 @@ function buildSidebar(currentDir, level) {
     const indent = '  '.repeat(level);
 
     if (stat.isDirectory()) {
-      // 直接处理子目录中的文件，不将目录本身作为一项添加到边栏中
-      buildSidebar(itemPath, level);
+      // 顶格显示目录名（加粗）
+      const displayName = item; // 目录名直接显示
+      sidebarContent += `${indent}* **${displayName}**\n`;
+      
+      // 缩进显示目录下的文件
+      buildSidebar(itemPath, level + 1);
     } else if (stat.isFile() && item.endsWith('.md')) {
       const fileNameWithoutExt = path.parse(item).name;
       // 排除 README.md 文件本身，如果需要链接它，应该在父级目录处特殊处理
@@ -89,10 +94,6 @@ function buildSidebar(currentDir, level) {
 
 // 从根目录（/docs，因为脚本会在那里运行）开始构建
 buildSidebar(docsDir, 0);
-
-// 在顶部添加一个指向根目录（README.md 或 index.html）的链接
-// 这通常是 Docsify 侧边栏的第一项
-sidebarContent = `* [首页](/)\n` + sidebarContent;
 
 // 写入 _sidebar.md 文件
 fs.writeFileSync(sidebarFile, sidebarContent);
