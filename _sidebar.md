@@ -6,3 +6,4 @@
   - [种子查询与转种](docs/功能介绍/种子查询与转种.md)
   - [设置](docs/功能介绍/设置.md)
 - [更新日志](docs/更新日志.md)
+- [GitHub](https://github.com/sqing33/pt-nexus)
