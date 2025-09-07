@@ -6,7 +6,9 @@
       "Bash(cat:*)",
       "WebFetch(domain:docsify.js.org)",
       "WebFetch(domain:github.com)",
-      "Bash(git ls-tree:*)"
+      "Bash(git ls-tree:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
